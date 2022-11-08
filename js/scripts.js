@@ -149,8 +149,7 @@ let pokemonList = [
 for (let i = 0; i < pokemonList.length; i++) {
   if (pokemonList[i].weightLbs > 200) {
     document.write(
-      `<div class="pokemon-list">
-        <div class="pokemon-list__item">
+      `<div class="pokemon-list__item">
           <img src="images/${pokemonList[i].name}.png" alt="Pokemon ${pokemonList[i].name} image" />
           <h2>${pokemonList[i].name}</h2>
           <h3>WOW! Super heavy!</h3>
@@ -158,21 +157,18 @@ for (let i = 0; i < pokemonList.length; i++) {
             <li><span>Height:</span>${pokemonList[i].heightFt}</li>
             <li><span>Weight:</span>${pokemonList[i].weightLbs}</li>
           </ul>
-        </div>
-      </div>`
+        </div>`
     );
   } else {
     document.write(
-      `<div class="pokemon-list">
-        <div class="pokemon-list__item">
+      `<div class="pokemon-list__item">
           <img src="images/${pokemonList[i].name}.png" alt="Pokemon ${pokemonList[i].name} image" />
           <h2>${pokemonList[i].name}</h2>
           <ul>
             <li><span>Height:</span>${pokemonList[i].heightFt}</li>
             <li><span>Weight:</span>${pokemonList[i].weightLbs}</li>
           </ul>
-        </div>
-      </div>`
+        </div>`
     );
   }
 }
