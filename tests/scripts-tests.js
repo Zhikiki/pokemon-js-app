@@ -276,3 +276,195 @@ do {
   console.log(i);
   i++;
 } while (i < 5);
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// FUNCTIONS
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// Functions are used to make it easier to run the code several times without dublicating it
+// Function consists of this parts:
+// Keyeword function - shows JS that function is going to be used
+function printParagraph() {
+  document.write(`<ul><li>The function keyword (which announces that a function is being declared)</li>
+<li>A function name (here, printArrayDetails)</li>
+<li>A set of parentheses to hold any input(s) you want to pass into the function block (these are called parameters and arguments: more on those in a little bit)</li>
+<li>A function block surrounded by curly braces (the code that will be executed when the function is used; the thing that the function does)</li></ul>`);
+}
+
+// To run the function we need to call it, using the name and ()
+printParagraph();
+
+// In () after function name we wright the parameters, that will be used inside the function
+function greatingMessage(firstName, lastName) {
+  document.write(
+    `<p>Hello, my name is ${firstName} and my surename is ${lastName}</p>`
+  );
+}
+// Wen we call the function in () we write arguments, that will be sent to function, so it can use it
+greatingMessage(`Ksenia`, `Zhykina`);
+greatingMessage(`Richard`, `Bogun`);
+
+// We can use results of function i our firther code
+// For example, we define a function that will return a result of summ of two parameters
+function sum(parametr1, parameter2) {
+  return parametr1 + parameter2;
+}
+
+// Then we set a variable, which value will be result of our function.
+// At the same point we call the function and send attributes to it
+let functionResult = sum(20, 5);
+document.write(`<p>${functionResult} - This is result of function</p>`);
+
+// You can assign a function to a variable and then use that variable as a function. It’s called a function expression.
+let add = function sumResult(value1, value2) {
+  return value1 + value2;
+};
+
+// Now we will use the result of variable-finction to set tht value for another variable
+let result1 = add(300, 200);
+document.write(`<p>${result1} - This is a result of variable-function</p>`); // returns as 500
+
+// let result2 = sumResult(300, 200);
+// document.write(`${result2}`); // Uncaught ReferenceError: sumResult is not defined cause sumResult is not set as a function
+
+// We can use functions without name. But in this case it should be assigned to the variable
+let message = function (firstName, lastName) {
+  document.write(
+    `<p>Hello ${firstName} ${lastName}! We are happy to great you with anonymous function</p>`
+  );
+};
+message(`Ksenia`, `Zhykina`);
+
+// Callback function - when result of one function becomes a parame
+function function1(x) {
+  return x + 15;
+}
+
+function function2(x) {
+  return x + 3;
+}
+console.log(function1(2)); //here we call function 1 and set attribute for it 2. Result of function will be 2 + 15 = 17
+console.log(function2(function1(6))); // here we call function 2 and set attribute for it - result of function one (with attribute 6).
+//Result of function 1 is 6 + 15 = 21. we console log it
+//Result of function 2 is 21 + 3 = 24. we console log it
+
+// You can write a function in such as way as to expect an input.
+//Then, when the function is called, it will place whatever input it’s given into its code.
+// That's how we can use one function for different types of data, not rewriting it over and over again
+//For example, we have universal function
+function universalFunction(differentData) {
+  return differentData * 100;
+}
+//Now we will call this function for different data
+let dataTypeOne = universalFunction(20);
+console.log(dataTypeOne);
+
+let dataTypeTwo = universalFunction(50);
+console.log(dataTypeTwo);
+
+// Here some example with return
+// With the help of return we can use results of function in our future code
+function divide(dividend, divisor) {
+  if (divisor === 0) {
+    return `You’re trying to divide by zero.`;
+  } else {
+    let result3 = dividend / divisor;
+    return result3;
+  }
+}
+console.log(divide(4, 2));
+console.log(divide(7, 0));
+console.log(divide(1, 4));
+console.log(divide(12, -3));
+
+//Variables you define within functions aren’t available outside that function.
+//Conversely, anything that’s been defined/declared outside of a function can be used within that function.
+let x = 5;
+
+function foo() {
+  let y = 10;
+  console.log('From inside foo(): x = ' + x);
+  console.log('From inside foo(): y = ' + y);
+}
+
+foo();
+console.log('From outside foo(): x = ' + x);
+// console.log('From outside foo(): y = ' + y); //return in console as undefined, cause this variable is defined inside function and is not avaliable outside
+
+// We can also make a declaration of function iside object
+// Mention that we don't give a name to the function
+let dog = {
+  type: 'pug',
+  age: 3,
+  name: 'Margot',
+  speak: function (userName) {
+    document.write(
+      `Wooff! Hello ${userName}! This is dog speaking with the function inside object`
+    );
+  },
+};
+// We call the function with the help of object name and key name (where the function is set)
+dog.speak('Ksenia');
+
+// THIS When you specify a function in an object, you can access the other properties or functions of the object inside of the function with this
+let dog1 = {
+  type: 'pug',
+  age: 3,
+  name: 'Margot',
+  speak: function (userName) {
+    document.write(
+      `<p>Wooff! Hello ${userName}! This is ${this.name} speaking with the function inside object</p>`
+    );
+  },
+};
+dog1.speak('Volodymyr');
+
+//Predefined functions
+console.log('Hello!'); // apeare as simple message in console
+console.warn('Warning!'); // appear as yelow massage in a yelow line
+console.error('Error!'); // appear as red message in a red line
+
+let c = 'hello there';
+let d = 'world';
+console.log(c.concat(d)); // will connect two strings together in one
+console.log(c.slice(3)); // will cut first 3 letters from the string
+// console.log(c.substr());
+console.log(c.split());
+console.log(c.length);
+// console.log(c.toUpperCase());
+
+// alert(`Hello, this is result of alert`) // appear as a pop up banner
+// let name3 = prompt(`Please eneter your name`) //appear as pop-up with ability for user to write
+// console.log(name3) //we will see in consele user input in prompt
+// let confirmation = confirm(`Do you confirm this`); // user is able to say yes or no
+// console.log(confirmation); // we will see true result, if yes. And false result - if no
+
+// Objects and arrays also come with a set of predefined functions to help with and simplify common operations.
+// will return an array of all the properties (or keys) that have been defined in the object reference you pass to the keys function:
+let kenny = {
+  name: `Anne`,
+  age: 38,
+  children: [],
+};
+
+let allProperties = Object.keys(kenny); // will return an array with key names
+console.log(allProperties);
+
+let animals = [`cat`, `dog`, `tiger`, `pig`];
+console.log(animals.length); // return the number of items in array
+animals.push(`cow`); // will add item to the end of array
+console.log(animals);
+animals.unshift(`bull`); // add the item at the beginning of array
+console.log(animals);
+animals.pop(); // removes the LAST item
+console.log(animals);
+animals.shift(); // removes the FIRST item
+console.log(animals);
+console.log(animals.indexOf(`tiger`)); // retern the index of item that is in ()
+console.log(animals.indexOf(`lion`)); // returns -1 cause there is no such item in array
+
+let numbers = [1, 2, 3, 4];
+console.log(numbers.reverse()); // reverses array, puts the last item to the first place
