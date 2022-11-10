@@ -56,22 +56,21 @@ let mixedArray = [
   { age: 5, name: 'kseniia', ukrinian: true },
 ];
 
-console.log(numberArray[1]);
+console.log(numberArray[1]); // returns 2
 // to get access to an property of an Object, which is the part of array
-console.log(mixedArray[3].ukrinian);
+console.log(mixedArray[3].ukrinian); // returns as true
 // to get access to the item of the Array, which is the part of bigger array
-console.log(mixedArray[2][1]);
-console.log(numberArray.length);
+console.log(mixedArray[2][1]); // returns 2. First it goes to "numberArray", then to item with index 1
+console.log(numberArray.length); // Returns 3 - amount of items in array
 
 // Primitive Data types doesnt change, they keep the copy of data, which was previosly created
 let a = 1;
 let b = a;
-console.log(a);
-console.log(b);
-
+console.log(a); // returns as 1
+console.log(b); // returns as 1
 a = 3;
-console.log(a);
-console.log(b);
+console.log(a); // returns as 3
+console.log(b); // returns as 1
 
 // Complex data types change, they doesnt keep the copy of data, which was previosly created, the keep only a link to the data
 let car1 = {
@@ -79,19 +78,19 @@ let car1 = {
   color: 'red',
 };
 let car2 = car1;
-console.log(car1);
-console.log(car2);
+console.log(car1); // returns with model 2019
+console.log(car2); // returns with model 2019
 
 car1.model = 2021;
 
-console.log(car1);
-console.log(car2);
+console.log(car1); // returns with model 2021 (it was changed)
+console.log(car2); // returns with model 2021 (it was changed)
 
 // To understand the type of data we can use the command typeof
 let myVariable = 'Hello world';
-console.log(typeof myVariable);
+console.log(typeof myVariable); // returns "string"
 myVariable = 10;
-console.log(typeof myVariable);
+console.log(typeof myVariable); // returns "number"
 
 // If statements
 let age = 23;
@@ -101,7 +100,7 @@ if (age === 20) {
   console.log('You are 21 years old!');
 } else {
   console.log('You are neither 20 nor 21 years old');
-}
+} // returns "You are neither 20 nor 21 years old"
 
 let day = 'Monday';
 if (day === 'Sunday') {
@@ -110,7 +109,7 @@ if (day === 'Sunday') {
   console.log("It's weekend");
 } else {
   console.log("It's not weekend. Boo!");
-}
+} // returns "It's not weekend. Boo!"
 
 // Comparisson in if statements
 console.log(1 === 2); //Reads 1=2, which is not right, so result is 'false'
@@ -221,7 +220,7 @@ for (let i = 1; i < 10; i++) {
 
 for (let i = 10; i > 0; i--) {
   console.log(i);
-}
+} // return numbers from 10 to 1, until they are biger than 0
 
 // This is example of loop used for array
 // Here i is set to 0 because it means the index (position) of array element. And we alway count here from 0
@@ -468,3 +467,132 @@ console.log(animals.indexOf(`lion`)); // returns -1 cause there is no such item 
 
 let numbers = [1, 2, 3, 4];
 console.log(numbers.reverse()); // reverses array, puts the last item to the first place
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// FOREACH()
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+
+//this is well known for loop
+let namelist = ['John', 'Anne', 'Carly'];
+for (let i = 0; i < namelist.length; i++) {
+  console.log(namelist[i]);
+} // return the names which are items of namelist array
+
+// we can loop throught this array with the help of forEach loop
+// as an parametr for forEach function we use anonymus function
+namelist.forEach(function (name) {
+  console.log(name);
+});
+// Another syntax is to devide forEach function and function that is a parametr for forEach
+function loggingNames(name) {
+  document.write(name);
+}
+namelist.forEach(loggingNames);
+// shorhand syntax for forEach
+namelist.forEach((name, index, fullList) => {
+  console.log(name, index, fullList);
+}); // returns as logging one by one the name, than index of array item, than full array
+// As we can mention before forEach can exept three parametrs
+
+//We can use forEach for an array of objects
+let userList = [
+  {
+    name: 'Liz',
+    age: 20,
+  },
+  {
+    name: 'John',
+    age: 30,
+  },
+  {
+    name: 'Sammy',
+    age: 40,
+  },
+];
+console.log(userList);
+// Logging with well known for loop
+for (let i = 0; i < userList.length; i++) {
+  console.log(`${userList[i].name} is ${userList[i].age} years old`);
+}
+// Logging with forEach loop (another option of syntax)
+userList.forEach((user) => {
+  console.log(`${user.name} is ${user.age} years old`);
+});
+// forEach with external parametr function (external function)
+function loggingUserData(user) {
+  document.write(`<p>${user.name} is ${user.age} years old</p>`);
+}
+userList.forEach(loggingUserData);
+
+//forEach() function is that it works great in combination with Object.keys()
+let richard = {
+  name: 'Richard',
+  age: 38,
+  children: [],
+};
+console.log(Object.keys(richard)); // returns an array from the object keys names
+// forEach with object.keyes with external function
+richard.property = `hause`; // returns as a new added property to the object richard
+Object.keys(richard).forEach(loggingKeys); // wee loop through an array and for each item call the function loggingKeys. forEach will pass the element of the array as a parameter (called property)
+function loggingKeys(property) {
+  // will get the element of the array from forEach
+  console.log(richard[property]);
+} // returns as logging the item from array richard (that consists of keys names after Object.keys)
+
+// forEach with object.keyes with internal anonymus function
+Object.keys(richard).forEach(function (property) {
+  console.log(richard[property]);
+});
+// forEach with object.keys with arow function
+Object.keys(richard).forEach((property) => console.log(richard[property]));
+
+// the beter way to write functions is to devide them into smaller iterations
+// For example we have function that make action for three variables
+let galina = {
+  name: 'Galina Vdovychak',
+  age: 46,
+  hasChildren: true,
+};
+
+function getPersonDescription(person) {
+  let personAge = `${person.age} years old`;
+  let personChildren = person.hasChildren ? `has children` : `has no children`;
+  let personFullInfo = `${person.name}, ${personAge}, ${personChildren}`;
+
+  return personFullInfo;
+}
+console.log(getPersonDescription(galina));
+
+// Let's make the same buy devide everything step by step
+let svitlana = {
+  name: 'Svitlana Garu',
+  age: 52,
+  hasChildren: true,
+};
+
+function getPersonAge1(age1) {
+  return `${age1} years old`;
+}
+function getChildrenInfo1(children) {
+  return children ? `has children` : `has no children`;
+}
+function getPersonDiscription1(person1) {
+  let ageDescription1 = getPersonAge1(person1.age);
+  let childrenDescription1 = getChildrenInfo1(person1.hasChildren);
+  return `${person1.name}, ${ageDescription1}, ${childrenDescription1}`;
+}
+
+console.log(getPersonDiscription1(svitlana));
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// Immediately Invoked Function Expression (or IIFE)
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// We use IIFE to avoid confusion with global variables 
