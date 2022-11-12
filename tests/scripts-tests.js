@@ -528,7 +528,7 @@ function loggingUserData(user) {
 }
 userList.forEach(loggingUserData);
 
-//forEach() function is that it works great in combination with Object.keys()
+//forEach() function works great in combination with Object.keys()
 let richard = {
   name: 'Richard',
   age: 38,
