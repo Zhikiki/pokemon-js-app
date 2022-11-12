@@ -1,3 +1,4 @@
+let pokemonRepository = (function () {
 let pokemonList = [
   {
     name: 'bulbasaur',
@@ -128,6 +129,32 @@ let pokemonList = [
     evolutions: ['Squirtle', 'Wartortle', 'Blastoise'],
   },
 ];
+function getAll () {
+  return pokemonList;
+}
+return {
+  getAll: getAll,
+};
+})()
+
+
+function getPocemonCard(pokemon) {
+  const isHeavyWeight =
+    pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
+  const pokemonItemHtml = `<div class="pokemon-list__item">
+          <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
+          <h2>${pokemon.name}</h2> 
+          ${isHeavyWeight} 
+          <ul>
+            <li><span>Height:</span>${pokemon.heightFt}</li>
+            <li><span>Weight:</span>${pokemon.weightLbs}</li>
+            
+          </ul>
+        </div>`;
+  document.write(pokemonItemHtml);
+}
+
+pokemonRepository.getAll().forEach(getPocemonCard);
 
 // This is suppoused HTML structure for DOM
 // <div class="pokemon-list">
@@ -144,50 +171,3 @@ let pokemonList = [
 //         </ul>
 //     </div>
 // </div>
-
-// for (let i = 0; i < pokemonList.length; i++) {
-//   if (pokemonList[i].weightLbs > 200) {
-//     document.write(
-//       `<div class="pokemon-list__item">
-//           <img src="images/${pokemonList[i].name}.png" alt="Pokemon ${pokemonList[i].name} image" />
-//           <h2>${pokemonList[i].name}</h2>
-//           <h3>WOW! Super heavy!</h3>
-//           <ul>
-//             <li><span>Height:</span>${pokemonList[i].heightFt}</li>
-//             <li><span>Weight:</span>${pokemonList[i].weightLbs}</li>
-//           </ul>
-//         </div>`
-//     );
-//   } else {
-//     document.write(
-//       `<div class="pokemon-list__item">
-//           <img src="images/${pokemonList[i].name}.png" alt="Pokemon ${pokemonList[i].name} image" />
-//           <h2>${pokemonList[i].name}</h2>
-//           <ul>
-//             <li><span>Height:</span>${pokemonList[i].heightFt}</li>
-//             <li><span>Weight:</span>${pokemonList[i].weightLbs}</li>
-//           </ul>
-//         </div>`
-//     );
-//   }
-// }
-
-// How can I put loop inside loop, so I can use aarays for types, weeknesses and evolutions
-// How can I make function composition for forEach function
-pokemonList.forEach(function (pokemon) {
-  const isHeavyWeight =
-    pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
-  const pokemonItemHtml = `<div class="pokemon-list__item">
-          <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
-          <h2>${pokemon.name}</h2> 
-          ${isHeavyWeight} 
-          <ul>
-            <li><span>Height:</span>${pokemon.heightFt}</li>
-            <li><span>Weight:</span>${pokemon.weightLbs}</li>
-            
-          </ul>
-        </div>`;
-  document.write(pokemonItemHtml);
-});
-
-// pokemonList.forEach(getPocemonCard);
