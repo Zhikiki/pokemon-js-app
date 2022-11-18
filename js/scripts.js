@@ -155,17 +155,48 @@ let pokemonRepository = (function () {
 function getPocemonCard(pokemon) {
   const isHeavyWeight =
     pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
-  const pokemonItemHtml = `<div class="pokemon-list__item">
-          <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
-          <h2>${pokemon.name}</h2> 
-          ${isHeavyWeight} 
-          <ul>
-            <li><span>Height:</span>${pokemon.heightFt}</li>
-            <li><span>Weight:</span>${pokemon.weightLbs}</li>
-            
-          </ul>
-        </div>`;
-  document.write(pokemonItemHtml);
+
+  let pokemonList = document.querySelector(`.pokemon-list`);
+  let pokemonListItem = document.createElement(`div`);
+  pokemonList.appendChild(pokemonListItem);
+  pokemonListItem.classList.add(`pokemon-list__item`);
+  // pokemonList.innerHTML = `<img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />`;
+
+  let pokemonName = document.createElement(`h2`);
+  pokemonListItem.appendChild(pokemonName);
+  pokemonName.innerText = pokemon.name;
+  
+  let pokemonUnique = document.createElement(`div`);
+  pokemonListItem.appendChild(pokemonUnique);
+  pokemonUnique.innerHTML = isHeavyWeight;
+
+  let pokemonFeature = document.createElement(`ul`);
+  pokemonListItem.appendChild(pokemonFeature);
+// Need to find a sollution how to make HEADINGS for Weight and Height strong
+  let pokemonHeight = document.createElement(`li`);
+  pokemonFeature.appendChild(pokemonHeight);
+  pokemonHeight.innerText = `Height: ${pokemon.heightFt}`;
+
+  let pokemonWeight = document.createElement(`li`);
+  pokemonFeature.appendChild(pokemonWeight);
+  pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
+
+  let pokemonButton = document.createElement(`button`);
+  pokemonListItem.appendChild(pokemonButton);
+  pokemonButton.innerText = `Show details`;
+  pokemonButton.classList.add(`pokemon-details__button`);
+
+
+  // const pokemonItemHtml = `<div class="pokemon-list__item">
+  //         <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
+  //         <h2>${pokemon.name}</h2>
+  //         ${isHeavyWeight}
+  //         <ul>
+  //           <li><span>Height:</span>${pokemon.heightFt}</li>
+  //           <li><span>Weight:</span>${pokemon.weightLbs}</li>
+  //         </ul>
+  //       </div>`;
+  // document.write(pokemonItemHtml);
 }
 
 pokemonRepository.getAll().forEach(getPocemonCard);
@@ -173,7 +204,6 @@ pokemonRepository.getAll().forEach(getPocemonCard);
 // Filter pokemons by name. I will need to create input field for search
 // Allso i need to write the function that will take attribute from
 // result of function findPokemon and create the card with result of the filter
-
 
 function findPokemon(queryValue) {
   return pokemonRepository.getAll().filter((value) => {
