@@ -146,47 +146,56 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function addListItem(pokemon) {
+    const isHeavyWeight =
+      pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
+
+    let pokemonList = document.querySelector(`.pokemon-list`);
+    let pokemonListItem = document.createElement(`div`);
+    pokemonList.appendChild(pokemonListItem);
+    pokemonListItem.classList.add(`pokemon-list__item`);
+
+    let pokemonImage = document.createElement(`img`);
+    pokemonListItem.appendChild(pokemonImage);
+    pokemonImage.setAttribute(`src`, `images/${pokemon.name}.png`);
+    pokemonImage.setAttribute(`alt`, `Pokemon ${pokemon.name} image`);
+
+    let pokemonName = document.createElement(`h2`);
+    pokemonListItem.appendChild(pokemonName);
+    pokemonName.innerText = pokemon.name;
+
+    let pokemonUnique = document.createElement(`div`);
+    pokemonListItem.appendChild(pokemonUnique);
+    pokemonUnique.innerHTML = isHeavyWeight;
+
+    let pokemonFeature = document.createElement(`ul`);
+    pokemonListItem.appendChild(pokemonFeature);
+    // Need to find a sollution how to make HEADINGS for Weight and Height strong
+    let pokemonHeight = document.createElement(`li`);
+    pokemonFeature.appendChild(pokemonHeight);
+    pokemonHeight.innerText = `Height: ${pokemon.heightFt}`;
+
+    let pokemonWeight = document.createElement(`li`);
+    pokemonFeature.appendChild(pokemonWeight);
+    pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
+
+    // Need to style the button
+    let pokemonButton = document.createElement(`button`);
+    pokemonListItem.appendChild(pokemonButton);
+    pokemonButton.innerText = `Show details`;
+    pokemonButton.classList.add(`pokemon-details__button`);
+  }
+
   return {
     getAll: getAll,
     add: add,
+    addListItem: addListItem,
   };
 })();
 
 function getPocemonCard(pokemon) {
-  const isHeavyWeight =
-    pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
-
-  let pokemonList = document.querySelector(`.pokemon-list`);
-  let pokemonListItem = document.createElement(`div`);
-  pokemonList.appendChild(pokemonListItem);
-  pokemonListItem.classList.add(`pokemon-list__item`);
-  // pokemonList.innerHTML = `<img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />`;
-
-  let pokemonName = document.createElement(`h2`);
-  pokemonListItem.appendChild(pokemonName);
-  pokemonName.innerText = pokemon.name;
-  
-  let pokemonUnique = document.createElement(`div`);
-  pokemonListItem.appendChild(pokemonUnique);
-  pokemonUnique.innerHTML = isHeavyWeight;
-
-  let pokemonFeature = document.createElement(`ul`);
-  pokemonListItem.appendChild(pokemonFeature);
-// Need to find a sollution how to make HEADINGS for Weight and Height strong
-  let pokemonHeight = document.createElement(`li`);
-  pokemonFeature.appendChild(pokemonHeight);
-  pokemonHeight.innerText = `Height: ${pokemon.heightFt}`;
-
-  let pokemonWeight = document.createElement(`li`);
-  pokemonFeature.appendChild(pokemonWeight);
-  pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
-
-  let pokemonButton = document.createElement(`button`);
-  pokemonListItem.appendChild(pokemonButton);
-  pokemonButton.innerText = `Show details`;
-  pokemonButton.classList.add(`pokemon-details__button`);
-
-
+  pokemonRepository.addListItem(pokemon);
+  // Old version of Pokemon Card code
   // const pokemonItemHtml = `<div class="pokemon-list__item">
   //         <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
   //         <h2>${pokemon.name}</h2>
