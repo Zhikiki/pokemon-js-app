@@ -160,6 +160,7 @@ let pokemonRepository = (function () {
     pokemonImage.setAttribute(`src`, `images/${pokemon.name}.png`);
     pokemonImage.setAttribute(`alt`, `Pokemon ${pokemon.name} image`);
 
+    // Need to find better sollution for positioning h2 - super feature
     let pokemonName = document.createElement(`h2`);
     pokemonListItem.appendChild(pokemonName);
     pokemonName.innerText = pokemon.name;
@@ -170,21 +171,43 @@ let pokemonRepository = (function () {
 
     let pokemonFeature = document.createElement(`ul`);
     pokemonListItem.appendChild(pokemonFeature);
-    // Need to find a sollution how to make HEADINGS for Weight and Height strong
+
     let pokemonHeight = document.createElement(`li`);
     pokemonFeature.appendChild(pokemonHeight);
-    pokemonHeight.innerText = `Height: ${pokemon.heightFt}`;
+    let pokemonHeightHeading = document.createElement(`span`);
+    pokemonHeight.appendChild(pokemonHeightHeading);
+    pokemonHeightHeading.innerText = `Height: `;
+    pokemonHeightHeading.classList.add(`pokemon-list__item-heading`);
+    let pokemonHeightValue = document.createElement(`span`);
+    pokemonHeight.appendChild(pokemonHeightValue);
+    pokemonHeightValue.innerText = `${pokemon.heightFt}`;
+    // pokemonHeight.innerText = `${pokemon.heightFt}`;
 
     let pokemonWeight = document.createElement(`li`);
     pokemonFeature.appendChild(pokemonWeight);
-    pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
+    let pokemonWeightHeading = document.createElement(`span`);
+    pokemonWeight.appendChild(pokemonWeightHeading);
+    pokemonWeightHeading.innerText = `Weight: `;
+    pokemonWeightHeading.classList.add(`pokemon-list__item-heading`);
+    let pokemonWeightValue = document.createElement(`span`);
+    pokemonWeight.appendChild(pokemonWeightValue);
+    pokemonWeightValue.innerText = `${pokemon.weightLbs}`;
+    // pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
 
-    // Need to style the button
+ 
     let pokemonButton = document.createElement(`button`);
     pokemonListItem.appendChild(pokemonButton);
     pokemonButton.innerText = `Show details`;
     pokemonButton.classList.add(`pokemon-details__button`);
+
+    pokemonButton.addEventListener(`click`, function () {
+      console.log(pokemon);
+    });
   }
+// If I use this function, i recieve logging of the names of all pokemo
+  // function showDetails(pokemon) {
+  //   console.log(pokemon);
+  // }
 
   return {
     getAll: getAll,
