@@ -245,3 +245,4 @@ function findPokemon(queryValue) {
   });
 }
 console.log(findPokemon('bulbasaur'));
+
