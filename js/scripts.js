@@ -96,17 +96,28 @@ let pokemonRepository = (function () {
         return response.json();
       })
       .then(function (json) {
-        json.results.forEach(function (item) {
-          let pokemon = {
-            name: item.name,
-            detailsUrl: item.url,
-          };
-          console.log(`detailsUrl`);
-          add(pokemon);
-        });
-      })
-      .catch(function (e) {
-        console.error(e);
+        json.results
+          .forEach(function (item) {
+            const moreDetails = fetch(item.url)
+              .then((res) => res.json())
+              .then((details) => {
+                return { height: details.height, weight: details.weight };
+              });
+            const mydetails = async () => {
+              const values = await moreDetails;
+              // console.log('values', values);
+              let pokemon = {
+                name: item.name,
+                detailsUrl: item.url,
+                height: values.height,
+                weight: values.weight,
+              };
+              // console.log(`detailsUrl`);
+              // console.log(pokemon);
+              add(pokemon);
+            };
+            mydetails();
+          });
       });
   }
 
@@ -230,6 +241,9 @@ function getPocemonCard(pokemon) {
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(getPocemonCard);
 });
+
+let pokemons = pokemonRepository.getAll();
+console.log(pokemons);
 
 // Filter pokemons by name. I will need to create input field for search
 // Allso i need to write the function that will take attribute from
