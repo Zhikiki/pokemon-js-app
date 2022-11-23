@@ -118,7 +118,7 @@ let pokemonRepository = (function () {
       })
       .then(function (details) {
         // Now we add the details to the item
-        item.imgUrl = details.sprites.front_default;
+        item.imgUrl = details.sprites.other.dream_world.front_default;
         item.height = details.height;
         item.weight = details.weight;
         item.types = details.types;
@@ -129,8 +129,6 @@ let pokemonRepository = (function () {
   }
 
   function showDetailsModal(item) {
-    console.log(item);
-    console.log(item.imgUrl);
     let detailsModalCard = document.querySelector(
       '#pkemon-details__modal-card'
     );
