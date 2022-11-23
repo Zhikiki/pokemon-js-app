@@ -101,6 +101,7 @@ let pokemonRepository = (function () {
             name: item.name,
             detailsUrl: item.url,
           };
+          console.log(`detailsUrl`);
           add(pokemon);
         });
       })
@@ -117,7 +118,7 @@ let pokemonRepository = (function () {
       })
       .then(function (details) {
         // Now we add the details to the item
-        item.imageUrl = details.sprites.front_default;
+        item.imgUrl = details.sprites.front_default;
         item.height = details.height;
         item.weight = details.weight;
         item.types = details.types;
@@ -127,11 +128,57 @@ let pokemonRepository = (function () {
       });
   }
 
+  function showDetailsModal(item) {
+    console.log(item);
+    console.log(item.imgUrl);
+    let detailsModalCard = document.querySelector(
+      '#pkemon-details__modal-card'
+    );
+
+    detailsModalCard.innerHTML = '';
+
+    let pokemonDetailsModal = document.createElement('div');
+    pokemonDetailsModal.classList.add('pokemon-details__modal');
+
+    let closeButton = document.createElement('button');
+    closeButton.classList.add('modal-close');
+    closeButton.innerText = 'Close';
+    // closeButton.addEventListener('click', hideDetailsModal)
+ 
+
+    let modalTitle = document.createElement('h2');
+    modalTitle.innerText = `${item.name}`;
+
+    let detailsContainer = document.createElement('div');
+    detailsContainer.classList.add('pkemon-details__container');
+
+    let pokemonImage = document.createElement('img');
+    pokemonImage.setAttribute(`src`, `${item.imgUrl}`);
+    pokemonImage.setAttribute(`alt`, `Pokemon ${item.name} image`);
+
+    let detailsList = document.createElement('ul');
+    let pokemonHeight = document.createElement('li');
+    pokemonHeight.innerHTML = `<span><strong>Height: </strong>${item.height}</span>`;
+    let pokemonWeight = document.createElement('li');
+    pokemonWeight.innerHTML = `<span><strong>Weight: </strong>${item.weight}</span>`;
+
+    detailsModalCard.appendChild(pokemonDetailsModal);
+    pokemonDetailsModal.appendChild(closeButton);
+    pokemonDetailsModal.appendChild(modalTitle);
+    pokemonDetailsModal.appendChild(detailsContainer);
+    detailsContainer.appendChild(pokemonImage);
+    detailsContainer.appendChild(detailsList);
+    detailsList.appendChild(pokemonHeight);
+    detailsList.appendChild(pokemonWeight);
+
+    detailsModalCard.classList.add('is-visible');
+  }
   function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
-      console.log(item);
+      showDetailsModal(item);
     });
   }
+
   return {
     add: add,
     getAll: getAll,
@@ -141,8 +188,7 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
   };
 })();
-// If I use this function, i recieve logging of the names of all pokemo
-//
+
 function getPocemonCard(pokemon) {
   pokemonRepository.addListItem(pokemon);
   // Old version of Pokemon Card code
