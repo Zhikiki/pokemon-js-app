@@ -143,8 +143,7 @@ let pokemonRepository = (function () {
     let closeButton = document.createElement('button');
     closeButton.classList.add('modal-close');
     closeButton.innerText = 'Close';
-    // closeButton.addEventListener('click', hideDetailsModal)
- 
+    closeButton.addEventListener('click', hideDetailsModal);
 
     let modalTitle = document.createElement('h2');
     modalTitle.innerText = `${item.name}`;
@@ -172,12 +171,39 @@ let pokemonRepository = (function () {
     detailsList.appendChild(pokemonWeight);
 
     detailsModalCard.classList.add('is-visible');
+
+    detailsModalCard.addEventListener('click', (e) => {
+      let target = e.target;
+      if (target === detailsModalCard) {
+        hideDetailsModal();
+      }
+    });
   }
+
   function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
       showDetailsModal(item);
     });
   }
+
+  function hideDetailsModal(params) {
+    let detailsModalCard = document.querySelector(
+      '#pkemon-details__modal-card'
+    );
+    detailsModalCard.classList.remove('is-visible');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    let detailsModalCard = document.querySelector(
+      '#pkemon-details__modal-card'
+    );
+    if (
+      e.key === 'Escape' &&
+      detailsModalCard.classList.contains('is-visible')
+    ) {
+      hideDetailsModal();
+    }
+  });
 
   return {
     add: add,

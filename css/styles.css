@@ -112,7 +112,7 @@ h3 {
     border-radius: 7px;
 }
 
-/* Later i need to display: none */
+
 #pkemon-details__modal-card {
     display: none;
 }
@@ -149,6 +149,9 @@ h3 {
     border: 3px solid var(--accent-color-text);
     border-radius: 25px;
 }
+.pokemon-details__modal h2 {
+    text-transform: capitalize;
+}
 
 .pkemon-details__container {
     display: flex;
@@ -156,6 +159,10 @@ h3 {
     align-content: center;
     flex-wrap: wrap;
     gap: 15px;
+}
+
+.pokemon-details__modal img {
+    min-width: 30%;
 }
 
 .pokemon-details__modal ul {
