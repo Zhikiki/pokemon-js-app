@@ -16,7 +16,7 @@ let pokemonRepository = (function () {
     //   evolutions: ['Bulbasaur', 'Ivysaur', 'Venusaur'],
     // },
   ];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
   function add(pokemon) {
     if (typeof pokemon === 'object' && 'name' in pokemon) {
@@ -43,7 +43,7 @@ let pokemonRepository = (function () {
 
     let pokemonImage = document.createElement(`img`);
     pokemonListItem.appendChild(pokemonImage);
-    pokemonImage.setAttribute(`src`, `images/${pokemon.name}.png`);
+    pokemonImage.setAttribute(`src`, pokemon.imgUrl);
     pokemonImage.setAttribute(`alt`, `Pokemon ${pokemon.name} image`);
 
     // Need to find better sollution for positioning h2 - super feature
@@ -66,7 +66,7 @@ let pokemonRepository = (function () {
     pokemonHeightHeading.classList.add(`pokemon-list__item-heading`);
     let pokemonHeightValue = document.createElement(`span`);
     pokemonHeight.appendChild(pokemonHeightValue);
-    pokemonHeightValue.innerText = `${pokemon.heightFt}`;
+    pokemonHeightValue.innerText = `${pokemon.height}`;
     // pokemonHeight.innerText = `${pokemon.heightFt}`;
 
     let pokemonWeight = document.createElement(`li`);
@@ -77,7 +77,7 @@ let pokemonRepository = (function () {
     pokemonWeightHeading.classList.add(`pokemon-list__item-heading`);
     let pokemonWeightValue = document.createElement(`span`);
     pokemonWeight.appendChild(pokemonWeightValue);
-    pokemonWeightValue.innerText = `${pokemon.weightLbs}`;
+    pokemonWeightValue.innerText = `${pokemon.weight}`;
     // pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
 
     let pokemonButton = document.createElement(`button`);
@@ -101,7 +101,6 @@ let pokemonRepository = (function () {
             name: item.name,
             detailsUrl: item.url,
           };
-          console.log(`detailsUrl`);
           add(pokemon);
         });
       })
@@ -213,22 +212,12 @@ let pokemonRepository = (function () {
   };
 })();
 
-function getPocemonCard(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-  // Old version of Pokemon Card code
-  // const pokemonItemHtml = `<div class="pokemon-list__item">
-  //         <img src="images/${pokemon.name}.png" alt="Pokemon ${pokemon.name} image" />
-  //         <h2>${pokemon.name}</h2>
-  //         ${isHeavyWeight}
-  //         <ul>
-  //           <li><span>Height:</span>${pokemon.heightFt}</li>
-  //           <li><span>Weight:</span>${pokemon.weightLbs}</li>
-  //         </ul>
-  //       </div>`;
-  // document.write(pokemonItemHtml);
-}
-pokemonRepository.loadList().then(function () {
-  pokemonRepository.getAll().forEach(getPocemonCard);
+pokemonRepository.loadList().then(function (res) {
+  pokemonRepository.getAll().forEach(p => {
+    pokemonRepository.loadDetails(p).then(function() {
+      pokemonRepository.addListItem(p);
+    });
+  });
 });
 
 // Filter pokemons by name. I will need to create input field for search
