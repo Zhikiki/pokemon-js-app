@@ -41,10 +41,15 @@ let pokemonRepository = (function () {
     pokemonList.appendChild(pokemonListItem);
     pokemonListItem.classList.add(`pokemon-list__item`);
 
+    let pokemonImageContainer = document.createElement('div');
+    pokemonImageContainer.classList.add('pokemon__image-container');
+    pokemonListItem.appendChild(pokemonImageContainer);
+
     let pokemonImage = document.createElement(`img`);
-    pokemonListItem.appendChild(pokemonImage);
+    pokemonImageContainer.appendChild(pokemonImage);
     pokemonImage.setAttribute(`src`, pokemon.imgUrl);
     pokemonImage.setAttribute(`alt`, `Pokemon ${pokemon.name} image`);
+    pokemonImage.classList.add(`pokemon__image`);
 
     // Need to find better sollution for positioning h2 - super feature
     let pokemonName = document.createElement(`h2`);
@@ -149,6 +154,7 @@ let pokemonRepository = (function () {
     detailsContainer.classList.add('pkemon-details__container');
 
     let pokemonImage = document.createElement('img');
+    pokemonImage.classList.add('pokemon__image');
     pokemonImage.setAttribute(`src`, `${item.imgUrl}`);
     pokemonImage.setAttribute(`alt`, `Pokemon ${item.name} image`);
 
@@ -213,8 +219,8 @@ let pokemonRepository = (function () {
 })();
 
 pokemonRepository.loadList().then(function (res) {
-  pokemonRepository.getAll().forEach(p => {
-    pokemonRepository.loadDetails(p).then(function() {
+  pokemonRepository.getAll().forEach((p) => {
+    pokemonRepository.loadDetails(p).then(function () {
       pokemonRepository.addListItem(p);
     });
   });

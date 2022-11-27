@@ -95,6 +95,20 @@ h3 {
     text-transform: capitalize;
 }
 
+.pokemon__image-container {
+    height: 50%;
+    max-width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokemon__image {
+    width: 150px;
+    max-height: 100%;
+}
+
 .pokemon-list__item ul {
     list-style-type: none;
     padding: 0;
@@ -116,6 +130,7 @@ h3 {
 #pkemon-details__modal-card {
     display: none;
 }
+
 #pkemon-details__modal-card.is-visible {
     position: fixed;
     padding: 20px;
@@ -149,6 +164,7 @@ h3 {
     border: 3px solid var(--accent-color-text);
     border-radius: 25px;
 }
+
 .pokemon-details__modal h2 {
     text-transform: capitalize;
     margin-bottom: 20px;
@@ -157,7 +173,7 @@ h3 {
 .pkemon-details__container {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 20px;
