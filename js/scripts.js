@@ -16,7 +16,7 @@ let pokemonRepository = (function () {
     //   evolutions: ['Bulbasaur', 'Ivysaur', 'Venusaur'],
     // },
   ];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=60';
 
   function add(pokemon) {
     if (typeof pokemon === 'object' && 'name' in pokemon) {
@@ -33,8 +33,6 @@ let pokemonRepository = (function () {
   function addListItem(pokemon) {
     const isHeavyWeight =
       pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
-    // let pokemonDetailsImage = loadDetails();
-    // console.log(loadDetails());
 
     let pokemonList = document.querySelector(`.pokemon-list`);
     let pokemonListItem = document.createElement(`div`);
