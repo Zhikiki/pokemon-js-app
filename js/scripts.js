@@ -35,58 +35,83 @@ let pokemonRepository = (function () {
       pokemon.weightLbs > 200 ? `<h3>WOW! Super heavy!</h3>` : ``;
 
     let pokemonList = document.querySelector(`.pokemon-list`);
-    let pokemonListItem = document.createElement(`div`);
-    pokemonList.appendChild(pokemonListItem);
-    pokemonListItem.classList.add(`pokemon-list__item`);
+    pokemonList.classList.add(`row`);
+    pokemonList.classList.add(`justify-content-center`);
 
-    let pokemonImageContainer = document.createElement('div');
-    pokemonImageContainer.classList.add('pokemon__image-container');
-    pokemonListItem.appendChild(pokemonImageContainer);
+    let pokemonItemContainer = document.createElement(`div`);
+    pokemonList.appendChild(pokemonItemContainer);
+    pokemonItemContainer.classList.add('col-sm-6');
+    pokemonItemContainer.classList.add('col-md-4');
+    pokemonItemContainer.classList.add('col-lg-3');
+    pokemonItemContainer.classList.add('p-1');
+
+    let pokemonListItem = document.createElement(`div`);
+    pokemonItemContainer.appendChild(pokemonListItem);
+    pokemonListItem.classList.add(`pokemon-list__item`);
+    pokemonListItem.classList.add(`py-3`);
+    pokemonListItem.classList.add(`row`);
+    pokemonListItem.classList.add(`m-0`);
+    pokemonListItem.classList.add(`text-center`);
+    pokemonListItem.classList.add(`justify-content-center`);
+
+    // let pokemonImageContainer = document.createElement('div');
+    // pokemonImageContainer.classList.add('pokemon__image-container');
+    // pokemonListItem.appendChild(pokemonImageContainer);
 
     let pokemonImage = document.createElement(`img`);
-    pokemonImageContainer.appendChild(pokemonImage);
+    pokemonListItem.appendChild(pokemonImage);
     pokemonImage.setAttribute(`src`, pokemon.imgUrl);
     pokemonImage.setAttribute(`alt`, `Pokemon ${pokemon.name} image`);
     pokemonImage.classList.add(`pokemon__image`);
+    pokemonImage.classList.add(`col-12`);
 
-    // Need to find better sollution for positioning h2 - super feature
     let pokemonName = document.createElement(`h2`);
     pokemonListItem.appendChild(pokemonName);
     pokemonName.innerText = pokemon.name;
+    pokemonName.classList.add(`text-capitalize`);
+    pokemonName.classList.add(`col-12`);
+    pokemonName.classList.add(`mt-3`);
 
+    // Need to find better sollution for positioning h2 - super feature
     let pokemonUnique = document.createElement(`div`);
     pokemonListItem.appendChild(pokemonUnique);
     pokemonUnique.innerHTML = isHeavyWeight;
+    pokemonUnique.classList.add(`col-12`);
 
     let pokemonFeature = document.createElement(`ul`);
     pokemonListItem.appendChild(pokemonFeature);
+    pokemonFeature.classList.add(`list-unstyled`);
+    pokemonFeature.classList.add(`col-12`);
 
     let pokemonHeight = document.createElement(`li`);
     pokemonFeature.appendChild(pokemonHeight);
     let pokemonHeightHeading = document.createElement(`span`);
     pokemonHeight.appendChild(pokemonHeightHeading);
     pokemonHeightHeading.innerText = `Height: `;
-    pokemonHeightHeading.classList.add(`pokemon-list__item-heading`);
+    pokemonHeightHeading.classList.add(`font-weight-bolder`);
     let pokemonHeightValue = document.createElement(`span`);
     pokemonHeight.appendChild(pokemonHeightValue);
     pokemonHeightValue.innerText = `${pokemon.height}`;
-    // pokemonHeight.innerText = `${pokemon.heightFt}`;
+
 
     let pokemonWeight = document.createElement(`li`);
     pokemonFeature.appendChild(pokemonWeight);
     let pokemonWeightHeading = document.createElement(`span`);
     pokemonWeight.appendChild(pokemonWeightHeading);
     pokemonWeightHeading.innerText = `Weight: `;
-    pokemonWeightHeading.classList.add(`pokemon-list__item-heading`);
+    pokemonWeightHeading.classList.add(`font-weight-bolder`);
     let pokemonWeightValue = document.createElement(`span`);
     pokemonWeight.appendChild(pokemonWeightValue);
     pokemonWeightValue.innerText = `${pokemon.weight}`;
-    // pokemonWeight.innerText = `Weight: ${pokemon.weightLbs}`;
+
 
     let pokemonButton = document.createElement(`button`);
     pokemonListItem.appendChild(pokemonButton);
     pokemonButton.innerText = `Show details`;
     pokemonButton.classList.add(`pokemon-details__button`);
+    pokemonButton.classList.add(`p-2`);
+    pokemonButton.classList.add(`rounded`);
+    pokemonButton.classList.add(`col-6`);
 
     pokemonButton.addEventListener(`click`, function () {
       showDetails(pokemon);
