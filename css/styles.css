@@ -75,11 +75,11 @@ h3 {
 }
 
 
-#pkemon-details__modal-card {
+/* #pkemon-details__modal-card {
     display: none;
-}
+} */
 
-#pkemon-details__modal-card.is-visible {
+/* #pkemon-details__modal-card.is-visible {
     position: fixed;
     padding: 20px;
     box-sizing: border-box;
@@ -89,18 +89,18 @@ h3 {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
 
-    /* to show it above other content */
+    to show it above other content
     z-index: 999;
 
-    /* to allow scrolling if the screen is not high enough*/
+    to allow scrolling if the screen is not high enough
     overflow: auto;
 
-    /* this is used to center the modal */
+    this is used to center the modal
     display: grid;
     text-align: center;
-}
+} */
 
-.pokemon-details__modal {
+/* .pokemon-details__modal {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
@@ -111,42 +111,47 @@ h3 {
     text-align: center;
     border: 3px solid var(--accent-color-text);
     border-radius: 25px;
+} */
+.modal-content {
+    padding: 15px;
+    border: 3px solid var(--accent-color-text);
+    border-radius: 25px;
 }
 
-.pokemon-details__modal h2 {
+/* .pokemon-details__modal h2 {
     text-transform: capitalize;
     margin-bottom: 20px;
-}
+} */
 
-.pkemon-details__container {
+/* .pkemon-details__container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 20px;
-}
+} */
 
-.pokemon-details__modal img {
+/* .pokemon-details__modal img {
     min-width: 30%;
     height: 150px;
-}
+} */
 
-.pokemon-details__modal ul {
+/* .pokemon-details__modal ul {
     list-style: none;
     padding: 0;
     text-align: left;
-}
+} */
 
-.modal-close {
+/* .modal-close {
     float: right;
     font-family: var(--secondary-font-fanily);
-    /* -webkit-appearance: none; */
+    -webkit-appearance: none;
     border: 0;
     background: none;
     color: #777;
     text-decoration: underline;
-}
+} */
 
 /* I should integrate icons to be able to change color of them */
 .page-footer {
