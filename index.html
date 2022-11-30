@@ -17,13 +17,19 @@
 </head>
 
 <body>
-    <header class="container d-flex justify-content-between align-items-center p-0 mb-3">
-        <img src="./images/pokemon-logo.png" class="header-logo fluid"
-            alt="Pokemon logo, a round that includes text Pokemon and a image of Pikachu">
-        <h1 class="text-right">
-            Pokédox
-        </h1>
-    </header>
+    <nav class="navbar sticky-top mb-0 mb-sm-4 px-5">
+        <a class="navbar-brand d-flex flex-wrap flex-row align-items-center justify-content-center" href="#">
+            <img src="./images/pokemon-logo.png" class="header-logo d-inline-block align-top"
+                alt="Pokemon logo, a round that includes text Pokemon and a image of Pikachu">
+            <h1 class="d-inline-block ml-2 mx-sm-4">
+                Pokédox
+            </h1>
+        </a>
+        <form class="form-inline my-4">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search pokemon" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
 
     <main>
         <div class="modal fade" id="pkemon-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -45,47 +51,13 @@
                 </div>
             </div>
         </div>
-        <!-- <div id="pkemon-details__modal-card"> -->
-            <!-- <div class="pokemon-details__modal">
-                <button class="modal-close">Close</button>
-                <h2 class="modal-title">Bulbasaur</h2>
-                <div class="pkemon-details__container">
-                    <img src="./images/bulbasaur.png" alt="Pokemon Bulbasaur image">
-                    <ul>
-                        <li>
-                            Height: 2.04
-                        </li>
-                        <li>
-                            Weight: 15.2
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-        <!-- </div> -->
         <div class="container">
             <div class="pokemon-list"></div>
         </div>
-
-        <!-- <div class="pokemon-list">
-            <div class="pokemon-list__item">
-                <img src="./images/bulbasaur.png" alt="Pokemon Bulbasaur image">
-                <h2>bulbasaur</h2>
-                <ul>
-                    <li>
-                        Height: 2.04
-                    </li>
-                    <li>
-                        Weight: 15.2
-                    </li>
-                </ul>
-            </div>
-        </div> -->
     </main>
 
-    <footer class="page-footer">
-        <p>Coded by Zhykiki
-
-        </p>
+    <footer class="page-footer my-4">
+        <h4>Coded by Zhykiki</h4>
         <div class="social-media">
             <a href="https://github.com/Zhikiki" target="_blank">
                 <img src="./images/icons/github_icon.svg"

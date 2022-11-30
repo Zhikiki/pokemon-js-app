@@ -144,8 +144,7 @@ let pokemonRepository = (function () {
 
     modalTitle.innerText = '';
     modalBody.innerText = '';
-    console.log(modalTitle);
-    console.log(modalBody);
+   
 
     modalTitle.innerText = `${item.name}`;
     modalTitle.classList.add('text-capitalize');
