@@ -138,13 +138,12 @@ let pokemonRepository = (function () {
   }
 
   function showDetailsModal(item) {
+    console.log(item);
     let modalBody = document.querySelector(`.modal-body`);
     let modalTitle = document.querySelector(`.modal-title`);
-    let modalHeader = document.querySelector(`.modal-header`);
 
     modalTitle.innerText = '';
     modalBody.innerText = '';
-   
 
     modalTitle.innerText = `${item.name}`;
     modalTitle.classList.add('text-capitalize');
@@ -231,6 +230,44 @@ let pokemonRepository = (function () {
     });
   }
 
+  function findPokemon2(queryValue) {
+    loadList().then(function () {
+      getAll().filter((value) => {
+        if (value.name === queryValue) {
+          console.log(value);
+        }
+      });
+    });
+  }
+
+  let searchForm = document.querySelector(`.form-inline`);
+  // let searchValue = $('#searchInput').val(); // The input returns as null, why
+  let searchValue = `bulbasaur`;
+  let searchButton = document.querySelector(`.btn-outline-success`);
+
+  function findPokemon3(searchValue) {
+    return getAll().filter((value) => {
+      if (value.name === searchValue) {
+        showDetailsModal(value);
+        // Value has all the information for creating modal, but modal doesnt show up
+        // showModal() is called. We have console.log from line 141
+        // But modal is not apearing
+      }
+    });
+  }
+ 
+  // Here I want to check if the input value is not empty
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (searchValue === '') {
+      alert(`You need to write the name of pokemon`);
+    } else {
+      findPokemon3(searchValue);
+    }
+  });
+
+
   return {
     add: add,
     getAll: getAll,
@@ -238,10 +275,11 @@ let pokemonRepository = (function () {
     loadList: loadList,
     loadDetails: loadDetails,
     showDetails: showDetails,
+    showDetailsModal: showDetailsModal,
   };
 })();
 
-pokemonRepository.loadList().then(function (res) {
+pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach((p) => {
     pokemonRepository.loadDetails(p).then(function () {
       pokemonRepository.addListItem(p);
@@ -253,11 +291,23 @@ pokemonRepository.loadList().then(function (res) {
 // Allso i need to write the function that will take attribute from
 // result of function findPokemon and create the card with result of the filter
 // After fetching API function doesn't work
-function findPokemon(queryValue) {
-  return pokemonRepository.getAll().filter((value) => {
-    if (value.name === queryValue) {
-      console.log(value);
-    }
-  });
-}
-console.log(findPokemon('bulbasaur'));
+// function findPokemon(queryValue) {
+//   return pokemonRepository.getAll().filter((value) => {
+//     if (value.name === queryValue) {
+//       console.log(value);
+//     }
+//   });
+// }
+// console.log(findPokemon('bulbasaur'));
+
+// Another version of filter function
+// function findPokemon2 (queryValue) {
+//   return pokemonRepository.loadList().then(function (res) {
+//     pokemonRepository.getAll().filter((value) => {
+//       if (value.name === queryValue) {
+//          console.log(value);
+//       }
+//     })
+//   })
+// }
+// console.log(findPokemon2('bulbasaur'));
