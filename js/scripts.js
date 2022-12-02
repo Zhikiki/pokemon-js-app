@@ -230,19 +230,9 @@ let pokemonRepository = (function () {
     });
   }
 
-  function findPokemon2(queryValue) {
-    loadList().then(function () {
-      getAll().filter((value) => {
-        if (value.name === queryValue) {
-          console.log(value);
-        }
-      });
-    });
-  }
-
   let searchForm = document.querySelector(`.form-inline`);
-  // let searchValue = $('#searchInput').val(); // The input returns as null, why
-  let searchValue = `bulbasaur`;
+  let searchValue = $('#searchInput').val(); // The input returns as null, why
+  // let searchValue = `bulbasaur`;
   let searchButton = document.querySelector(`.btn-outline-success`);
 
   function findPokemon3(searchValue) {
@@ -255,18 +245,18 @@ let pokemonRepository = (function () {
       }
     });
   }
- 
-  // Here I want to check if the input value is not empty
-  searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+  function getValue() {
+    let searchValue = $('#searchInput').val();
     if (searchValue === '') {
       alert(`You need to write the name of pokemon`);
     } else {
-      findPokemon3(searchValue);
+      findPokemon3(searchValue.toLowerCase());
     }
+  }
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    getValue();
   });
-
 
   return {
     add: add,
