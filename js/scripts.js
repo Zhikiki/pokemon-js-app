@@ -138,7 +138,6 @@ let pokemonRepository = (function () {
   }
 
   function showDetailsModal(item) {
-    console.log(item);
     let modalBody = document.querySelector(`.modal-body`);
     let modalTitle = document.querySelector(`.modal-title`);
 
@@ -270,7 +269,6 @@ pokemonRepository.loadList().then(function () {
     });
   });
 });
-
 
 // Another version of filter function
 // function findPokemon2 (queryValue) {
