@@ -91,7 +91,7 @@ let pokemonRepository = (function () {
     pokemonButton.classList.add(`rounded`);
     pokemonButton.classList.add(`col-6`);
     pokemonButton.setAttribute('data-toggle', 'modal');
-    pokemonButton.setAttribute('data-target', '#pkemon-modal');
+    pokemonButton.setAttribute('data-target', '#pokemon-modal');
 
     pokemonButton.addEventListener(`click`, function () {
       showDetails(pokemon);
@@ -231,17 +231,11 @@ let pokemonRepository = (function () {
   }
 
   let searchForm = document.querySelector(`.form-inline`);
-  let searchValue = $('#searchInput').val(); // The input returns as null, why
-  // let searchValue = `bulbasaur`;
-  let searchButton = document.querySelector(`.btn-outline-success`);
 
-  function findPokemon3(searchValue) {
+  function findPokemon(searchValue) {
     return getAll().filter((value) => {
       if (value.name === searchValue) {
         showDetailsModal(value);
-        // Value has all the information for creating modal, but modal doesnt show up
-        // showModal() is called. We have console.log from line 141
-        // But modal is not apearing
       }
     });
   }
@@ -250,7 +244,7 @@ let pokemonRepository = (function () {
     if (searchValue === '') {
       alert(`You need to write the name of pokemon`);
     } else {
-      findPokemon3(searchValue.toLowerCase());
+      findPokemon(searchValue.toLowerCase());
     }
   }
   searchForm.addEventListener('submit', (e) => {
@@ -277,18 +271,6 @@ pokemonRepository.loadList().then(function () {
   });
 });
 
-// Filter pokemons by name. I will need to create input field for search
-// Allso i need to write the function that will take attribute from
-// result of function findPokemon and create the card with result of the filter
-// After fetching API function doesn't work
-// function findPokemon(queryValue) {
-//   return pokemonRepository.getAll().filter((value) => {
-//     if (value.name === queryValue) {
-//       console.log(value);
-//     }
-//   });
-// }
-// console.log(findPokemon('bulbasaur'));
 
 // Another version of filter function
 // function findPokemon2 (queryValue) {
