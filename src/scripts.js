@@ -152,6 +152,7 @@ let pokemonRepository = (function () {
     let modalContainer = document.createElement('div');
     modalBody.appendChild(modalContainer);
     modalContainer.classList.add('row');
+    modalContainer.classList.add('align-items-center');
 
     let modalImage = document.createElement('img');
     modalContainer.appendChild(modalImage);
@@ -231,19 +232,21 @@ let pokemonRepository = (function () {
 
   let searchForm = document.querySelector(`.form-inline`);
 
-  function findPokemon(searchValue) {
-    return getAll().filter((value) => {
-      if (value.name === searchValue) {
-        showDetailsModal(value);
-      }
-    });
-  }
+  // BUG showDetailsModal is called only after second push of the button
+  // Need to clean input value after showDetailsModal() succeded
   function getValue() {
-    let searchValue = $('#searchInput').val();
+    let searchValue = $('#searchInput').val().toLowerCase();
+    let submitButton = document.querySelector('#submit-button');
     if (searchValue === '') {
       alert(`You need to write the name of pokemon`);
     } else {
-      findPokemon(searchValue.toLowerCase());
+      getAll().filter((value) => {
+        if (value.name === searchValue) {
+          submitButton.setAttribute('data-toggle', 'modal');
+          submitButton.setAttribute('data-target', '#pokemon-modal');
+          showDetailsModal(value);
+        }
+      });
     }
   }
   searchForm.addEventListener('submit', (e) => {
@@ -270,14 +273,3 @@ pokemonRepository.loadList().then(function () {
   });
 });
 
-// Another version of filter function
-// function findPokemon2 (queryValue) {
-//   return pokemonRepository.loadList().then(function (res) {
-//     pokemonRepository.getAll().filter((value) => {
-//       if (value.name === queryValue) {
-//          console.log(value);
-//       }
-//     })
-//   })
-// }
-// console.log(findPokemon2('bulbasaur'));
