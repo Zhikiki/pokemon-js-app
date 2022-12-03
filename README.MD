@@ -1,5 +1,6 @@
 # Project Name
 Pokemon JS App
+https://zhikiki.github.io/pokemon-js-app/
 
 ## Project description:
 Small web application with **HTML**, **CSS**, and **JavaScript** that loads data from an **external API** and enables the viewing of data points in detail.
